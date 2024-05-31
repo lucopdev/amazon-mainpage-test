@@ -3,4 +3,5 @@ export default interface ISliderProps {
   width: string;
   height: string;
   gradient: string;
+  arrowPosition: string;
 }

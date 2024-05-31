@@ -3,15 +3,11 @@ import React, { useContext } from 'react';
 import IApiContextProps from '../../interfaces/IApiContextProps';
 import ImageSlider from '../ImageSlider/ImageSlider';
 import ApiContext from '../../context/ApiContext';
+import { slides } from '../../mockedData/images';
 
 function ProductGrid() {
   const bgColors = ['bg-bgBeige', 'bg-bgGreen', 'bg-bgBlue', 'bg-bgOrange'];
-  const slides = [
-    'https://m.media-amazon.com/images/I/716rTwzAdJL._SX3000_.jpg',
-    'https://m.media-amazon.com/images/I/71esLobihEL._SX3000_.jpg',
-    'https://m.media-amazon.com/images/I/71bSrLeFTxL._SX3000_.jpg',
-    'https://m.media-amazon.com/images/I/71B8HAwjM1L._SX3000_.jpg',
-  ];
+
 
   const { products, categories } = useContext<IApiContextProps>(
     ApiContext as React.Context<IApiContextProps>
@@ -19,8 +15,8 @@ function ProductGrid() {
 
   return (
     <div className="w-[95%] flex flex-wrap justify-center items-center">
-      {/* CARROSEL */}
-      <ImageSlider width="100%" height="600px" gradient="0" slides={slides} />
+      
+      <ImageSlider width="100%" height="600px" gradient="0" arrowPosition='top' slides={slides} />
 
       <div className="relative flex flex-wrap justify-center items-center mt-[240px] z-10">
         {categories?.slice(0, 4).map((category: string, index: number) => (
