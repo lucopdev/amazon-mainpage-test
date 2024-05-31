@@ -1,0 +1,63 @@
+{
+  "data": [
+    {
+      "title": "Destaques",
+      "subtitles": ["Mais vendidos", "Novidades na Amazon", "Produtos em alta"]
+    },
+    {
+      "title": "Conteúdo digitale dispositivos",
+      "subtitles": [
+        "Amazon Fire TV",
+        "Amazon Music",
+        "Prime Video",
+        "Aplicativos Amazon",
+        "Dispositivos Kindle e eBooks",
+        "Echo e Alexa",
+        "Audiolivros Audible"
+      ]
+    },
+    {
+      "title": "Comprar por categoria",
+      "subtitles": [
+        "Alimentos e Bebidas",
+        "Automotivo",
+        "Bebês",
+        "Beleza e Cuidados Pessoais",
+        "Bolsas, Malas e Mochilas",
+        "Brinquedos e Jogos",
+        "Casa, Jardim e Limpeza",
+        "Celulares e Comunicação",
+        "Computadores e Informática",
+        "Cozinha",
+        "Eletrônicos, TV e Áudio",
+        "Esportes, Aventura e Lazer",
+        "Ferramentas e Construção",
+        "Filmes, Séries e Música",
+        "Games e Consoles",
+        "Livros",
+        "Papelaria e Escritório",
+        "Pet Shop",
+        "Roupas, Calçados e Acessórios"
+      ]
+    },
+    {
+      "title": "PROGRAMAS E RECURSOS",
+      "subtitles": [
+        "Amazon Prime",
+        "Mais por Menos",
+        "Dicas de Presentes",
+        "Venda na Amazon",
+        "Lista do Bebê",
+        "Programe e Poupe",
+        "Crédito e Produtos de Pagamento",
+        "Amazon Outlet",
+        "Reaproveite com a Amazon",
+        "Publique seu livro"
+      ]
+    },
+    {
+      "title": "AJUDA E CONFIGURAÇÕES",
+      "subtitles": ["Sua conta", "Ajuda", "Faça seu login"]
+    }
+  ]
+}
