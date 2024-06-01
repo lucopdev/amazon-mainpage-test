@@ -15,7 +15,7 @@ function App() {
   );
 
   return (
-    <main className={`${isModalOpen && 'lock-screen'} flex flex-col items-center`}>
+    <main className={`${isModalOpen && 'lock-screen'} flex flex-col items-center min-w-[1200px]`}>
       {isModalOpen && menuModal}
       <Header />
       <NavigationBar />

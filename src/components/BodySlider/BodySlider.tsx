@@ -40,7 +40,7 @@ function BodySlider({ slides, width = '100%', height = '100%' }: IBodySlider) {
           </button>
           <div className="w-full flex items-center justify-between overflow-x-scroll">
             {slides?.map((slide) => (
-              <img className="w-[200px] h-[200px]" src={slide} />
+              <img key={Math.random()} className="w-[200px] h-[200px]" src={slide} />
             ))}
           </div>
 

@@ -20,7 +20,7 @@ function HeaderSlider({
   };
 
   return (
-    <div className="w-full flex items-center justify-center absolute">
+    <div className="w-full flex items-center justify-center absolute ">
       <div
         className="absolute top-[0px] z-0 bg-no-repeat bg-cover"
         style={{
