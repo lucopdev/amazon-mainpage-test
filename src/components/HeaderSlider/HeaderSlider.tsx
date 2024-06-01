@@ -1,7 +1,12 @@
 import { useState } from 'react';
-import ISliderProps from '../../interfaces/ISliderProps';
+import IHeaderSlider from '../../interfaces/IHeaderSlider';
 
-function ImageSlider({ slides, width, height, gradient, arrowPosition }: ISliderProps) {
+function HeaderSlider({
+  slides,
+  width = '100%',
+  height = '280px',
+  gradient = '100',
+}: IHeaderSlider) {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const slideLeft = () => {
@@ -14,25 +19,15 @@ function ImageSlider({ slides, width, height, gradient, arrowPosition }: ISlider
     setCurrentIndex(index);
   };
 
-  const arrowStyle = {
-    top:
-      arrowPosition === 'top'
-        ? '0%'
-        : arrowPosition === 'middle'
-        ? '25%'
-        : arrowPosition === 'bottom'
-        ? '55%'
-        : '25%',
-  };
-
   return (
-    <div className="w-full flex items-center justify-center relative">
+    <div className="w-full flex items-center justify-center absolute">
       <div
         className="absolute top-[0px] z-0 bg-no-repeat bg-cover"
         style={{
           width: width,
           height: height,
           backgroundImage: `url(${slides[currentIndex]})`,
+          backgroundPosition: 'center',
         }}
       >
         <div
@@ -43,17 +38,15 @@ function ImageSlider({ slides, width, height, gradient, arrowPosition }: ISlider
         >
           <button
             onClick={slideLeft}
-            style={arrowStyle}
-            className="w-[85px] h-[250px] text-[120px] absolute text-black pt-5 flex items-start justify-center focus:rounded focus:border-2 focus:border-white"
+            className="w-[85px] h-[250px] text-[120px] relative text-black flex items-center justify-center focus:rounded focus:border-2 focus:border-white"
           >
-            <span className="">&#8249;</span>
+            <span className="leading-[70px] w-14 h-24 text-[120px]">&#8249;</span>
           </button>
           <button
             onClick={slideRight}
-            style={arrowStyle}
-            className="w-[85px] h-[250px] text-[120px] absolute right-0 text-black pt-5 flex items-start justify-center focus:rounded focus:border-2 focus:border-white"
+            className="w-[85px] h-[250px] text-[120px] relative right-0 text-black flex items-center justify-center focus:rounded focus:border-2 focus:border-white"
           >
-            <span className="">&#8250;</span>
+            <span className="leading-[70px] w-14 h-24 text-[120px]">&#8250;</span>
           </button>
         </div>
       </div>
@@ -61,4 +54,4 @@ function ImageSlider({ slides, width, height, gradient, arrowPosition }: ISlider
   );
 }
 
-export default ImageSlider;
+export default HeaderSlider;

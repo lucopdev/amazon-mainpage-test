@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 
 import IApiContextProps from '../../interfaces/IApiContextProps';
-import ImageSlider from '../ImageSlider/ImageSlider';
+import HeaderSlider from '../HeaderSlider/HeaderSlider';
 import ApiContext from '../../context/ApiContext';
-import { slides } from '../../mockedData/images';
+import { slides, logoSlides } from '../../mockedData/images';
+import BodySlider from '../BodySlider/BodySlider';
 
 function ProductGrid() {
   const bgColors = ['bg-bgBeige', 'bg-bgGreen', 'bg-bgBlue', 'bg-bgOrange'];
-
 
   const { products, categories } = useContext<IApiContextProps>(
     ApiContext as React.Context<IApiContextProps>
@@ -15,8 +15,9 @@ function ProductGrid() {
 
   return (
     <div className="w-[95%] flex flex-wrap justify-center items-center">
-      
-      <ImageSlider width="100%" height="600px" gradient="0" arrowPosition='top' slides={slides} />
+      <div className="w-full flex absolute top-[100px]">
+        <HeaderSlider width="95%" height="600px" gradient="0" slides={slides} />
+      </div>
 
       <div className="relative flex flex-wrap justify-center items-center mt-[240px] z-10">
         {categories?.slice(0, 4).map((category: string, index: number) => (
@@ -73,12 +74,15 @@ function ProductGrid() {
         ))}
       </div>
 
-      <div className="w-full h-[280px] bg-yellow-500 mt-[10px] mb-[10px]"></div>
-      {/* CARROSEL */}
-      <div className="w-full h-[280px] bg-yellow-500 mt-[10px] mb-[10px]"></div>
-      {/* CARROSEL */}
-      <div className="w-full h-[280px] bg-yellow-500 border mt-[10px] mb-[10px]"></div>
-      {/* CARROSEL */}
+      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center">
+        <BodySlider slides={logoSlides} />
+      </div>
+      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center">
+        <BodySlider slides={logoSlides} />
+      </div>
+      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center">
+        <BodySlider slides={logoSlides} />
+      </div>
 
       <div className="flex flex-wrap justify-center items-center">
         {products?.slice(16, 20).map((product) => (
@@ -99,10 +103,12 @@ function ProductGrid() {
         ))}
       </div>
 
-      <div className="w-full h-[280px] bg-yellow-500 mt-[10px] mb-[10px]"></div>
-      {/* CARROSEL */}
-      <div className="w-full h-[280px] bg-yellow-500 mt-[10px] mb-[10px]"></div>
-      {/* CARROSEL */}
+      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center">
+        <BodySlider slides={logoSlides} />
+      </div>
+      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center">
+        <BodySlider slides={logoSlides} />
+      </div>
 
       <div className="flex flex-wrap justify-center items-center">
         {products?.slice(0, 4).map((product) => (
@@ -122,8 +128,13 @@ function ProductGrid() {
           </div>
         ))}
       </div>
-      <div className="w-full h-[280px] bg-yellow-500 mt-[10px] mb-[10px]"></div>
-      {/* CARROSEL */}
+
+      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center">
+        <BodySlider slides={logoSlides} />
+      </div>
+      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center">
+        <BodySlider slides={logoSlides} />
+      </div>
     </div>
   );
 }
