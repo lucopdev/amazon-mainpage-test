@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { Suspense, lazy, useContext } from 'react';
 
 import NavigationBar from './components/NavigationBar/NavigationBar';
 import IMenuContextProps from './interfaces/IMenuContextProps';
@@ -6,8 +6,9 @@ import Header from './components/Header/Header';
 import MenuContext from './context/MenuContext';
 
 import './App.css';
-import Footer from './components/Footer/Footer';
-import ProductComponent from './components/ProductComponent/ProductComponent';
+
+const ProductComponent = lazy(() => import('./components/ProductComponent/ProductComponent'));
+const Footer = lazy(() => import('./components/Footer/Footer'));
 
 function App() {
   const { menuModal, isModalOpen } = useContext<IMenuContextProps>(
@@ -20,8 +21,10 @@ function App() {
       <div className="flex flex-col items-center min-w-[1200px]">
         <Header />
         <NavigationBar />
-        <ProductComponent />
-        <Footer />
+        <Suspense fallback={<div className="w-full h-full"></div>}>
+          <ProductComponent />
+          <Footer />
+        </Suspense>
       </div>
     </main>
   );

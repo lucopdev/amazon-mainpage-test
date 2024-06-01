@@ -10,7 +10,7 @@ function Menu() {
     MenuContext as React.Context<IMenuContextProps>
   );
   return (
-    <div className="menu-shadow flex absolute w-full z-50">
+    <div className="bg-bgBlackShadow flex absolute w-full z-50">
       <div className="menu-bar w-[365px] bg-white">
         <div className="bg-bgNav h-[50px]">
           <h1 className="h-full text-[18px] pl-7 flex justify-start items-center font-bold">

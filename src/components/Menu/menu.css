@@ -1,8 +1,3 @@
-.menu-shadow {
-  background-color: rgba(0, 0, 0, 0.8);
-  height: 100vh;
-}
-
 .menu-bar-ul {
   height: calc(100vh - 50px);
 }

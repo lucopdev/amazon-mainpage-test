@@ -43,20 +43,22 @@ function NavigationBar() {
                 className="text-nowrap h-full border-bgNav hover:border-0 hover:border-white"
               >
                 <span className="text-[13.5px] pl-2 pr-2">{title} &#9660;</span>
-
-                {showPopup && (
+              </button>
+              {showPopup && (
+                <div>
+                  <div className="absolute -left-[0px] w-full h-[300vh] bg-bgBlackShadow z-20"></div>
                   <div
-                    className="absolute top-full left-[507.5px] rounded transform -translate-x-[58px] w-[340px] bg-white shadow-lg"
+                    className="absolute top-full left-[507.5px] rounded transform -translate-x-[58px] w-[340px] bg-white shadow-lg z-30"
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                   >
                     <div className="absolute left-[57px] transform -translate-x-1/2 -mt-2 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-white border-b-8"></div>
-                    <div className="text-center z-20 h-[370px] flex items-center justify-center">
+                    <div className="text-center h-[370px] flex items-center justify-center">
                       <img src={popupPrimeBtn} />
                     </div>
                   </div>
-                )}
-              </button>
+                </div>
+              )}
             </div>
           ) : (
             <button

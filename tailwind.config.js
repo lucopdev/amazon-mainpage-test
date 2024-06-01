@@ -8,6 +8,7 @@ export default {
     },
     extend: {
       colors: {
+        bgBlackShadow: '#000000b3',
         bgMainTheme: '#e3e6e6',
         darkTextColor: '#555855',
         bgHeader: '#131921',

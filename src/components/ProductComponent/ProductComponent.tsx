@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React, { Suspense, lazy, useContext } from 'react';
 
 import IApiContextProps from '../../interfaces/IApiContextProps';
 import { slides, logoSlides } from '../../mockedData/images';
 import HeaderSlider from '../HeaderSlider/HeaderSlider';
 import ICategory from '../../interfaces/ICategory';
 import ApiContext from '../../context/ApiContext';
-import BodySlider from '../BodySlider/BodySlider';
 import ProductGrid from '../ProductGrid/ProductGrid';
+
+const BodySlider = lazy(() => import('../BodySlider/BodySlider'));
 
 function ProductComponent() {
   const bgColors = ['bg-bgBeige', 'bg-bgGreen', 'bg-bgBlue', 'bg-bgOrange'];
@@ -20,7 +21,8 @@ function ProductComponent() {
       <div className="w-full flex absolute top-[100px] desktop:w-[1580px] min-w-[1200px]">
         <HeaderSlider width="95%" height="600px" gradient="0" slides={slides} />
       </div>
-
+      
+      <Suspense />
       <div className="relative grid grid-cols-4 max-tablet:grid-cols-3 justify-center items-center mt-[240px] z-10">
         {categories?.slice(13, 17).map((category: ICategory, index: number) => (
           <div
@@ -70,28 +72,30 @@ function ProductComponent() {
         ]}
       />
 
-      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px] max-desktop:w-[98.5%]">
-        <BodySlider slides={logoSlides} />
-      </div>
-      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px] max-desktop:w-[98.5%]">
-        <BodySlider
-          slides={products?.map((product) =>
-            product.category === 'mobile-accessories' ? product.images[0] : ''
-          )}
-        />
-      </div>
-
-      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px] max-desktop:w-[98.5%]">
-        <BodySlider
-          slides={products
-            ?.map((product) => (product.category === 'mens-watches' ? product.images[0] : ''))
-            .concat(
-              products?.map((product) =>
-                product.category === 'womens-watches' ? product.images[0] : ''
-              )
+      <Suspense fallback={<div className="w-full h-full"></div>}>
+        <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px] max-desktop:w-[98.5%]">
+          <BodySlider slides={logoSlides} />
+        </div>
+        <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px] max-desktop:w-[98.5%]">
+          <BodySlider
+            slides={products?.map((product) =>
+              product.category === 'mobile-accessories' ? product.images[0] : ''
             )}
-        />
-      </div>
+          />
+        </div>
+
+        <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px] max-desktop:w-[98.5%]">
+          <BodySlider
+            slides={products
+              ?.map((product) => (product.category === 'mens-watches' ? product.images[0] : ''))
+              .concat(
+                products?.map((product) =>
+                  product.category === 'womens-watches' ? product.images[0] : ''
+                )
+              )}
+          />
+        </div>
+      </Suspense>
 
       <ProductGrid
         products={products}
@@ -105,26 +109,30 @@ function ProductComponent() {
         ]}
       />
 
-      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px] max-desktop:w-[98.5%]">
-        <BodySlider
-          slides={products
-            ?.map((product) => (product.category === 'home-accessories' ? product.images[0] : ''))
-            .concat(
-              products?.map((product) =>
-                product.category === 'kitchen-accessories' ? product.images[0] : ''
-              )
-            )}
-        />
-      </div>
-      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px] max-desktop:w-[98.5%]">
-        <BodySlider
-          slides={products
-            ?.map((product) => (product.category === 'laptops' ? product.images[0] : ''))
-            .concat(
-              products?.map((product) => (product.category === 'tablets' ? product.images[0] : ''))
-            )}
-        />
-      </div>
+      <Suspense fallback={<div className="w-full h-full"></div>}>
+        <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px] max-desktop:w-[98.5%]">
+          <BodySlider
+            slides={products
+              ?.map((product) => (product.category === 'home-accessories' ? product.images[0] : ''))
+              .concat(
+                products?.map((product) =>
+                  product.category === 'kitchen-accessories' ? product.images[0] : ''
+                )
+              )}
+          />
+        </div>
+        <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px] max-desktop:w-[98.5%]">
+          <BodySlider
+            slides={products
+              ?.map((product) => (product.category === 'laptops' ? product.images[0] : ''))
+              .concat(
+                products?.map((product) =>
+                  product.category === 'tablets' ? product.images[0] : ''
+                )
+              )}
+          />
+        </div>
+      </Suspense>
 
       <ProductGrid
         products={products}
@@ -138,28 +146,30 @@ function ProductComponent() {
         ]}
       />
 
-      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px] max-desktop:w-[98.5%]">
-        <BodySlider
-          slides={products
-            ?.map((product) => (product.category === 'beauty' ? product.images[0] : ''))
-            .concat(
-              products?.map((product) =>
-                product.category === 'skin-care' ? product.images[0] : ''
-              )
-            )}
-        />
-      </div>
-      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px] max-desktop:w-[98.5%]">
-        <BodySlider
-          slides={products
-            ?.map((product) => (product.category === 'womens-bags' ? product.images[0] : ''))
-            .concat(
-              products?.map((product) =>
-                product.category === 'womens-shoes' ? product.images[0] : ''
-              )
-            )}
-        />
-      </div>
+      <Suspense fallback={<div className="w-full h-full"></div>}>
+        <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px] max-desktop:w-[98.5%]">
+          <BodySlider
+            slides={products
+              ?.map((product) => (product.category === 'beauty' ? product.images[0] : ''))
+              .concat(
+                products?.map((product) =>
+                  product.category === 'skin-care' ? product.images[0] : ''
+                )
+              )}
+          />
+        </div>
+        <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px] max-desktop:w-[98.5%]">
+          <BodySlider
+            slides={products
+              ?.map((product) => (product.category === 'womens-bags' ? product.images[0] : ''))
+              .concat(
+                products?.map((product) =>
+                  product.category === 'womens-shoes' ? product.images[0] : ''
+                )
+              )}
+          />
+        </div>
+      </Suspense>
     </div>
   );
 }
