@@ -7,7 +7,7 @@ import MenuContext from './context/MenuContext';
 
 import './App.css';
 import Footer from './components/Footer/Footer';
-import ProductGrid from './components/ProductGrid/ProductGrid';
+import ProductComponent from './components/ProductComponent/ProductComponent';
 
 function App() {
   const { menuModal, isModalOpen } = useContext<IMenuContextProps>(
@@ -15,12 +15,14 @@ function App() {
   );
 
   return (
-    <main className={`${isModalOpen && 'lock-screen'} flex flex-col items-center min-w-[1200px]`}>
+    <main className={`${isModalOpen && 'lock-screen'}`}>
       {isModalOpen && menuModal}
-      <Header />
-      <NavigationBar />
-      <ProductGrid />
-      <Footer />
+      <div className="flex flex-col items-center min-w-[1200px]">
+        <Header />
+        <NavigationBar />
+        <ProductComponent />
+        <Footer />
+      </div>
     </main>
   );
 }

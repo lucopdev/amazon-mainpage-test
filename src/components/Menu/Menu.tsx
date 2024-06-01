@@ -10,7 +10,7 @@ function Menu() {
     MenuContext as React.Context<IMenuContextProps>
   );
   return (
-    <div className="menu-shadow flex absolute w-full z-20">
+    <div className="menu-shadow flex absolute w-full z-50">
       <div className="menu-bar w-[365px] bg-white">
         <div className="bg-bgNav h-[50px]">
           <h1 className="h-full text-[18px] pl-7 flex justify-start items-center font-bold">
@@ -20,11 +20,14 @@ function Menu() {
         </div>
         <div className="menu-bar-ul overflow-scroll overflow-x-hidden">
           {menuListData.data.map((data, index) => (
-            <ul key={index}>
+            <ul key={Math.random()}>
               <h1 className="pt-5 pl-9 pb-1 text-[16.8px] text-black font-bold">{data.title}</h1>
 
               {data.subtitles.map((subtitle) => (
-                <li className="flex items-center text-black text-[13.3px] pl-9 h-11 hover:bg-bgLiMenu">
+                <li
+                  key={Math.random()}
+                  className="flex items-center text-black text-[13.3px] pl-9 h-11 hover:bg-bgLiMenu"
+                >
                   {subtitle}
                 </li>
               ))}

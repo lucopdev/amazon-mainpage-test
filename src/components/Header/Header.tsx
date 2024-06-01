@@ -3,18 +3,14 @@ import magGlass from '../../assets/images/mag_glass_icon.png';
 import cartIcon from '../../assets/images/cart_icon.png';
 import headerLogo from '../../assets/images/logo.png';
 import localLogo from '../../assets/images/local.png';
+import options from '../../mockedData/categoriesMock';
+
 import './header.css';
 
 const Header: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState<string>('Todos');
   const selectRef = useRef<HTMLSelectElement>(null);
   const spanRef = useRef<HTMLSpanElement>(null);
-
-  const options = [
-    { value: 'todos', label: 'Todos os departamentos' },
-    { value: 'Dispositivos Amazon', label: 'Dispositivos Amazon' },
-    { value: 'Alexa Skills', label: 'Alexa Skills' },
-  ];
 
   const adjustSelectWidth = () => {
     if (selectRef.current && spanRef.current) {
