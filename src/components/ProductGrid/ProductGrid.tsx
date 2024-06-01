@@ -16,7 +16,7 @@ function ProductGrid() {
 
   return (
     <div className="w-[95%] flex flex-wrap justify-center items-center">
-      <div className="w-full flex absolute top-[100px]">
+      <div className="w-full flex absolute top-[100px] desktop:w-[1580px]">
         <HeaderSlider width="95%" height="600px" gradient="0" slides={slides} />
       </div>
 
@@ -61,7 +61,9 @@ function ProductGrid() {
             className="flex flex-col items-center w-[350px] h-[415px] m-[10px] p-[20px] bg-white"
             key={Math.random()}
           >
-            <h1 className="text-black text-[21px] font-bold mb-5">Aproveite os descontos</h1>
+            <h1 className="text-black text-[21px] font-bold mb-5">
+              Aproveite descontos em {product.category}
+            </h1>
             <div className="flex flex-col items-center w-full h-full overflow-hidden">
               {/* criar uma classe ou uma entidade para o objeto product para poder tipar */}
               <img className="w-full h-full" src={product.images[0]} />
@@ -73,17 +75,17 @@ function ProductGrid() {
         ))}
       </div>
 
-      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center">
+      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px]">
         <BodySlider slides={logoSlides} />
       </div>
-      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center">
+      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px]">
         <BodySlider
           slides={products?.map((product) =>
             product.category === 'mobile-accessories' ? product.images[0] : ''
           )}
         />
       </div>
-      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center">
+      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px]">
         <BodySlider
           slides={products
             ?.map((product) => (product.category === 'mens-watches' ? product.images[0] : ''))
@@ -101,7 +103,9 @@ function ProductGrid() {
             className="flex flex-col items-center w-[350px] h-[415px] m-[10px] p-[20px] bg-white"
             key={Math.random()}
           >
-            <h1 className="text-black text-[21px] font-bold mb-5">Compre roupas em até 12x</h1>
+            <h1 className="text-black text-[21px] font-bold mb-5">
+              Compre {product.category} em até 12x
+            </h1>
             <div className="flex flex-col items-center w-full h-full  overflow-hidden">
               {/* criar uma classe ou uma entidade para o objeto product para poder tipar */}
               <h1></h1>
@@ -114,7 +118,7 @@ function ProductGrid() {
         ))}
       </div>
 
-      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center">
+      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px]">
         <BodySlider
           slides={products
             ?.map((product) => (product.category === 'home-accessories' ? product.images[0] : ''))
@@ -125,7 +129,7 @@ function ProductGrid() {
             )}
         />
       </div>
-      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center">
+      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px]">
         <BodySlider
           slides={products
             ?.map((product) => (product.category === 'laptops' ? product.images[0] : ''))
@@ -136,12 +140,14 @@ function ProductGrid() {
       </div>
 
       <div className="flex flex-wrap justify-center items-center">
-        {products?.slice(100, 108).map((product) => (
+        {products?.slice(98, 106).map((product) => (
           <div
             className="flex flex-col items-center w-[350px] h-[415px] m-[10px] p-[20px] bg-white"
             key={Math.random()}
           >
-            <h1 className="text-black text-[21px] font-bold mb-5">Frete grátis na sua região</h1>
+            <h1 className="text-black text-[21px] font-bold mb-5">
+              {product.title}
+            </h1>
             <div className="flex flex-col items-center w-full h-full  overflow-hidden">
               {/* criar uma classe ou uma entidade para o objeto product para poder tipar */}
               <h1></h1>
@@ -154,7 +160,7 @@ function ProductGrid() {
         ))}
       </div>
 
-      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center">
+      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px]">
         <BodySlider
           slides={products
             ?.map((product) => (product.category === 'beauty' ? product.images[0] : ''))
@@ -165,7 +171,7 @@ function ProductGrid() {
             )}
         />
       </div>
-      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center">
+      <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px]">
         <BodySlider
           slides={products
             ?.map((product) => (product.category === 'womens-bags' ? product.images[0] : ''))
