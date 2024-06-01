@@ -5,12 +5,12 @@ function BodySlider({ slides, width = '100%', height = '100%' }: IBodySlider) {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const slideLeft = () => {
-    const index = currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
+    const index = slides && currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
     setCurrentIndex(index);
   };
 
   const slideRight = () => {
-    const index = currentIndex === slides.length - 1 ? 0 : currentIndex + 1;
+    const index =  slides && (currentIndex === (slides.length - 1)) ? 0 : currentIndex + 1;
     setCurrentIndex(index);
   };
 
@@ -39,9 +39,9 @@ function BodySlider({ slides, width = '100%', height = '100%' }: IBodySlider) {
             </span>
           </button>
           <div className="w-full flex items-center justify-between overflow-x-scroll">
-            {slides.map((slide) =>
-              slide.map((item) => <img className="w-[200px] h-[200px]" src={item} />)
-            )}
+            {slides?.map((slide) => (
+              <img className="w-[180px] h-[180px]" src={slide} />
+            ))}
           </div>
 
           <button

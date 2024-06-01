@@ -1,5 +1,5 @@
 export default interface IBodySlider {
-  slides: string[][];
+  slides: string[] | undefined;
   width?: string;
   height?: string;
 }

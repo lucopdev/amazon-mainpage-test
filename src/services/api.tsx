@@ -1,15 +1,13 @@
-import { Product } from '../model/product';
-
 export const getAllProducts = async () => {
-  const URL = 'https://fakestoreapi.com/products';
+  const URL = 'https://dummyjson.com/products?limit=0&skip=0';
   const response = await fetch(URL);
-  const data = (await response.json()) as Product[];
+  const data = await response.json();
 
-  return data;
+  return data.products;
 };
 
 export const getAllCategories = async () => {
-  const URL = 'https://fakestoreapi.com/products/categories';
+  const URL = 'https://dummyjson.com/products/categories';
   const response = await fetch(URL);
   const data = await response.json();
 
@@ -17,7 +15,7 @@ export const getAllCategories = async () => {
 };
 
 export const getInCategory = async (category: string) => {
-  const URL = `https://fakestoreapi.com/products/category/${category}`;
+  const URL = `https://dummyjson.com/products/category/${category}`;
   const response = await fetch(URL);
   const data = await response.json();
 

@@ -1,10 +1,7 @@
-import { Product } from '../model/product';
+import ICategory from './ICategory';
+import IProducts from './Iproducts';
 
 export default interface IApiContextProps {
-  products: Product[] | undefined;
-  categories: string[];
-  jeweleryProducts: Product[];
-  electronicProducts: Product[];
-  mensClothingProducts: Product[];
-  womensClothingProducts: Product[];
+  products: IProducts[] | undefined;
+  categories: ICategory[] | undefined;
 }
