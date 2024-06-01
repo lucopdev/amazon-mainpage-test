@@ -1,5 +1,5 @@
 import { ReactNode, useMemo, useState } from 'react';
-import MenuContext from './MenuContext';
+import MenuContext from '../context/MenuContext';
 import Menu from '../components/Menu/Menu';
 
 interface MenuProviderProps {

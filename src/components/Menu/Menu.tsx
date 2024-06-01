@@ -6,11 +6,16 @@ import { useContext } from 'react';
 import './menu.css';
 
 function Menu() {
-  const { closeMenuModal } = useContext<IMenuContextProps>(
+  const { closeMenuModal, setIsModalOpen } = useContext<IMenuContextProps>(
     MenuContext as React.Context<IMenuContextProps>
   );
+
+  const onDismiss = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <div className="bg-bgBlackShadow flex absolute w-full z-50">
+    <div className="bg-bgBlackShadow flex absolute w-full z-50" onClick={onDismiss}>
       <div className="menu-bar w-[365px] bg-white">
         <div className="bg-bgNav h-[50px]">
           <h1 className="h-full text-[18px] pl-7 flex justify-start items-center font-bold">
