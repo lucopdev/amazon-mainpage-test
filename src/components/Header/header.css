@@ -8,6 +8,7 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   position: relative;
+  width: auto;
 }
 
 .custom-select-container::after {
@@ -25,10 +26,14 @@
 
 .custom-select-container:hover::after {
   color: #333;
-  background-color: #D4D4D4;
+  background-color: #d4d4d4;
 }
 
 .custom-select:focus {
   border-color: none;
   outline: none;
+}
+
+.custom-options {
+  width: 200px;
 }
