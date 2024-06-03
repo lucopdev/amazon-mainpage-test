@@ -1,6 +1,8 @@
 import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
 
+import ICepConsultContextProps from '../../interfaces/ICepConsultContextProps';
 import IApiContextProps from '../../interfaces/IApiContextProps';
+import CepConsultContext from '../../context/CepConsultContext';
 import magGlass from '../../assets/images/mag_glass_icon.png';
 import LoginPopupBtn from '../LoginPopupBtn/LoginPopupBtn';
 import cartIcon from '../../assets/images/cart_icon.png';
@@ -11,10 +13,13 @@ import uniqueId from 'uniqueid';
 
 import './header.css';
 
-const Header: React.FC = () => {
+function Header() {
   const uKey = uniqueId('key');
   const { categories } = useContext<IApiContextProps>(
     ApiContext as React.Context<IApiContextProps>
+  );
+  const { cepData, openCepMenu } = useContext<ICepConsultContextProps>(
+    CepConsultContext as React.Context<ICepConsultContextProps>
   );
 
   const [selectedOption, setSelectedOption] = useState<string>('Todos');
@@ -55,11 +60,14 @@ const Header: React.FC = () => {
         src={headerLogo}
         alt="Logo"
       />
-      <button className="flex border border-bgHeader hover:border hover:border-white h-[48px] pl-3 pr-5 text-left">
+      <button
+        className="flex border border-bgHeader hover:border hover:border-white h-[48px] pl-3 pr-5 text-left"
+        onClick={openCepMenu}
+      >
         <img className="mt-[15px]" src={localLogo} />
         <div>
-          <p className="text-[12px]">A entrega será feita em Bela Vista 01319900</p>
-          <span className="font-bold text-[14px]">Atualizar Local</span>
+          <p className="text-[12px]">{cepData ? 'Enviar para' : 'A entrega será feita em Bela Vista 01319900'}</p>
+          <span className="font-bold text-[14px]">{cepData ? cepData.cep : 'Atualizar Local'}</span>
         </div>
       </button>
       <div className="flex flex-grow h-[40px] pl-3 pr-3 items-center">
@@ -90,7 +98,7 @@ const Header: React.FC = () => {
         </div>
         <input
           type="text"
-          className="flex-grow h-full text-[15px] placeholder-slate-600 placeholder pl-[6px]"
+          className="flex-grow h-full text-[14px] placeholder-slate-600 placeholder pl-[6px] text-black"
           placeholder="Pesquisa Amazon.com.br"
         />
         <button className="h-full bg-searchBtn rounded-tr-[4px] pl-[1.5px] rounded-br-[4px] text-black">
@@ -121,6 +129,6 @@ const Header: React.FC = () => {
       </button>
     </header>
   );
-};
+}
 
 export default Header;

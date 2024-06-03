@@ -10,16 +10,12 @@ import './menu.css';
 
 function Menu() {
   const uKey = uniqueId('key');
-  const { isModalOpen, closeMenuModal, setIsModalOpen } = useContext<IMenuContextProps>(
+  const { isModalOpen, closeMenuModal } = useContext<IMenuContextProps>(
     MenuContext as React.Context<IMenuContextProps>
   );
 
-  const onDismiss = () => {
-    setIsModalOpen(false);
-  };
-
   return (
-    <div className={`flex ${isModalOpen ? 'menu-open' : 'menu-close'}`} onClick={onDismiss}>
+    <div className={`flex ${isModalOpen ? 'menu-open' : 'menu-close'}`}>
       <div className="menu-bar w-[365px] bg-white">
         <div className="bg-bgNav h-[50px]">
           <h1 className="h-full text-[18px] pl-7 flex justify-start items-center font-bold">
@@ -48,8 +44,8 @@ function Menu() {
           <div className="h-10"></div>
         </div>
       </div>
-      <div className="w-10 h-10 relative top-1 flex items-center justify-center">
-        <button className="w-full h-full flex items-center justify-center" onClick={closeMenuModal}>
+      <div className="absolute w-10 top-0 -right-[40px] items-center justify-center">
+        <button className="w-full h-[45px] flex items-center justify-center" onClick={closeMenuModal}>
           <h1 className="text-[35px]">x</h1>
         </button>
       </div>

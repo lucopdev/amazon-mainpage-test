@@ -21,3 +21,11 @@ export const getInCategory = async (category: string) => {
 
   return data;
 };
+
+export const getCep = async (cep: string) => {
+  const URL = `https://viacep.com.br/ws/${cep}/json/`;
+  const response = await fetch(URL);
+  const data = await response.json();
+
+  return data;
+};
