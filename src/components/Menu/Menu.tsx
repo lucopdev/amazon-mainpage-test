@@ -1,11 +1,15 @@
+import { useContext } from 'react';
+
 import userImagePlaceholder from '../../assets/images/user_image_placeholder.png';
 import IMenuContextProps from '../../interfaces/IMenuContextProps';
 import menuListData from '../../mockedData/menuListData.json';
 import MenuContext from '../../context/MenuContext';
-import { useContext } from 'react';
+import uniqueId from 'uniqueid';
+
 import './menu.css';
 
 function Menu() {
+  const uKey = uniqueId('key');
   const { closeMenuModal, setIsModalOpen } = useContext<IMenuContextProps>(
     MenuContext as React.Context<IMenuContextProps>
   );
@@ -25,12 +29,12 @@ function Menu() {
         </div>
         <div className="menu-bar-ul overflow-scroll overflow-x-hidden">
           {menuListData.data.map((data, index) => (
-            <ul key={Math.random()}>
+            <ul key={uKey()}>
               <h1 className="pt-5 pl-9 pb-1 text-[16.8px] text-black font-bold">{data.title}</h1>
 
               {data.subtitles.map((subtitle) => (
                 <li
-                  key={Math.random()}
+                  key={uKey()}
                   className="flex items-center text-black text-[13.3px] pl-9 h-11 hover:bg-bgLiMenu"
                 >
                   {subtitle}

@@ -1,17 +1,28 @@
-import { useState } from 'react';
+import { RefObject, useRef } from 'react';
+
 import IBodySlider from '../../interfaces/IBodySlider';
+import uniqueId from 'uniqueid';
 
 function BodySlider({ slides, width = '100%', height = '100%' }: IBodySlider) {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const carousel: RefObject<HTMLDivElement> = useRef(null);
+  const uKey = uniqueId('key');
 
   const slideLeft = () => {
-    const index = slides && currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
-    setCurrentIndex(index);
+    if (carousel.current) {
+      carousel.current.scrollBy({
+        left: -carousel.current.offsetWidth,
+        behavior: 'smooth',
+      });
+    }
   };
 
   const slideRight = () => {
-    const index = slides && currentIndex === slides.length - 1 ? 0 : currentIndex + 1;
-    setCurrentIndex(index);
+    if (carousel.current) {
+      carousel.current.scrollBy({
+        left: carousel.current.offsetWidth,
+        behavior: 'smooth',
+      });
+    }
   };
 
   return (
@@ -27,7 +38,7 @@ function BodySlider({ slides, width = '100%', height = '100%' }: IBodySlider) {
           width: width,
           height: height,
         }}
-        className=" bg-white"
+        className="bg-white"
       >
         <div className="w-full h-full flex relative">
           <button
@@ -38,12 +49,19 @@ function BodySlider({ slides, width = '100%', height = '100%' }: IBodySlider) {
               &#x02039;
             </span>
           </button>
-          <div className="w-full flex items-center justify-between overflow-x-scroll">
-            {slides?.map((slide) => (
-              <img key={Math.random()} className="w-[200px] h-[200px]" src={slide} />
+          <div
+            className="w-full flex items-center justify-between overflow-x-scroll"
+            ref={carousel}
+          >
+            {slides?.map((slide, index) => (
+              <img
+                key={uKey()}
+                className="w-[200px] h-[200px]"
+                src={slide}
+                alt={`Slide ${index}`}
+              />
             ))}
           </div>
-
           <button
             onClick={slideRight}
             className="w-[45px] h-[105px] bg-white shadow-md shadow-slate-500 absolute rounded right-5 top-[28%] pb-3 text-black flex items-center justify-center focus:rounded focus:border-2 focus:border-bgNav"

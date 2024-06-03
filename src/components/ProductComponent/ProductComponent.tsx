@@ -3,13 +3,15 @@ import React, { Suspense, lazy, useContext } from 'react';
 import IApiContextProps from '../../interfaces/IApiContextProps';
 import { slides, logoSlides } from '../../mockedData/images';
 import HeaderSlider from '../HeaderSlider/HeaderSlider';
+import ProductGrid from '../ProductGrid/ProductGrid';
 import ICategory from '../../interfaces/ICategory';
 import ApiContext from '../../context/ApiContext';
-import ProductGrid from '../ProductGrid/ProductGrid';
+import uniqueId from 'uniqueid';
 
 const BodySlider = lazy(() => import('../BodySlider/BodySlider'));
 
 function ProductComponent() {
+  const uKey = uniqueId('key');
   const bgColors = ['bg-bgBeige', 'bg-bgGreen', 'bg-bgBlue', 'bg-bgOrange'];
 
   const { products, categories } = useContext<IApiContextProps>(
@@ -19,7 +21,7 @@ function ProductComponent() {
   return (
     <div className="w-[95%] flex flex-wrap justify-center items-center">
       <div className="w-full flex absolute top-[100px] desktop:w-[1580px] min-w-[1200px]">
-        <HeaderSlider width="95%" height="600px" gradient="0" slides={slides} />
+        <HeaderSlider slides={slides} />
       </div>
       
       <Suspense />
@@ -29,7 +31,7 @@ function ProductComponent() {
             className={`flex flex-col items-center justify-start w-[350px] h-[415px] max-[1580px]:w-[95%] m-[10px] p-[15px] bg-white ${
               index === 3 && 'max-tablet:hidden'
             }`}
-            key={Math.random()}
+            key={uKey()}
           >
             <div className="w-full flex items-start">
               <h1 className="text-black text-[21px] font-bold p-0 -mb-5">{`Conheça os ${category.name}`}</h1>
@@ -40,7 +42,7 @@ function ProductComponent() {
                   ?.filter((product) => product.category === category.slug)
                   ?.slice(0, 4)
                   ?.map((productByCategory) => (
-                    <div key={Math.random()} className="flex flex-col items-start">
+                    <div key={uKey()} className="flex flex-col items-start">
                       <div
                         className={`w-[144px] h-28 flex ${bgColors[index]} m-[8px] items-center justify-center max-[1580px]:w-[90%] max-[1580px]:h-[90%] max-tablet:w-[144px]`}
                       >

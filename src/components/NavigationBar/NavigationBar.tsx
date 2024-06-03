@@ -3,10 +3,13 @@ import { useContext, useState } from 'react';
 import popupPrimeBtn from '../../assets/images/popup_prime_btn.png';
 import IMenuContextProps from '../../interfaces/IMenuContextProps';
 import HamburgerIcon from '../HamburguerIcon/HamburguerIcon';
+import PrimePopupBtn from '../PrimePopupBtn/PrimePopupBtn';
 import navBarData from '../../mockedData/navBarData.json';
 import MenuContext from '../../context/MenuContext';
+import uniqueId from 'uniqueid';
 
 function NavigationBar() {
+  const uKey = uniqueId('key');
   const { openMenuModal } = useContext<IMenuContextProps>(
     MenuContext as React.Context<IMenuContextProps>
   );
@@ -35,7 +38,7 @@ function NavigationBar() {
         {navBarData.titles.map((title) =>
           title === 'Prime' ? (
             <div
-              key={Math.random()}
+              key={uKey()}
               className="text-nowrap h-full border border-bgNav hover:border hover:border-white z-20 "
             >
               <button
@@ -46,24 +49,16 @@ function NavigationBar() {
                 <span className="text-[13.5px] pl-2 pr-2">{title} &#9660;</span>
               </button>
               {showPopup && (
-                <div>
-                  <div className="absolute -left-[0px] w-full h-[300vh] bg-bgBlackShadow z-20"></div>
-                  <div
-                    className="absolute top-full left-[507.5px] rounded transform -translate-x-[58px] bg-white shadow-lg z-30"
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                  >
-                    <div className="absolute left-[57px] transform -translate-x-1/2 -mt-2 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-white border-b-8"></div>
-                    <div className="text-center w-[340px] h-[370px] flex items-center justify-center">
-                      <img src={popupPrimeBtn} />
-                    </div>
-                  </div>
-                </div>
+                <PrimePopupBtn
+                  handleMouseEnter={handleMouseEnter}
+                  handleMouseLeave={handleMouseLeave}
+                  popupPrimeBtn={popupPrimeBtn}
+                />
               )}
             </div>
           ) : (
             <button
-              key={Math.random()}
+              key={uKey()}
               className="text-nowrap h-full border border-bgNav hover:border hover:border-white"
             >
               <span className="text-[13.5px] pl-2 pr-2">{title}</span>
