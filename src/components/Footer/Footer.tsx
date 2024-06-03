@@ -2,9 +2,18 @@ import footerLogo from '../../assets/images/footer_logo.png';
 import brazilFlag from '../../assets/images/brazil_flag.png';
 
 function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+    });
+  };
+
   return (
     <div className="w-full flex flex-col bg-bgNav">
-      <button className="inicio w-full h-[48px] flex items-center justify-center bg-bgFooterBtn text-[13px] hover:bg-bgFooterBtnHover">
+      <button
+        className="inicio w-full h-[48px] flex items-center justify-center bg-bgFooterBtn text-[13px] hover:bg-bgFooterBtnHover"
+        onClick={scrollToTop}
+      >
         Voltar ao início
       </button>
       <div className="h-[427.5px] flex flex-col items-center justify-start">
