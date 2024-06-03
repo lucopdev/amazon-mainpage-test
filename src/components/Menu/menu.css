@@ -1,3 +1,18 @@
 .menu-bar-ul {
   height: calc(100vh - 50px);
 }
+
+.menu-open {
+  left: 0px;
+  position: absolute;
+  transition: left 0.4s ease;
+  z-index: 50;
+  width: 100vw;
+}
+
+.menu-close {
+  left: -400px;
+  position: absolute;
+  transition: left 0.5s ease;
+  z-index: 50;
+}

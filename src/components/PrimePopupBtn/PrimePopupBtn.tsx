@@ -3,9 +3,9 @@ import IPrimePopupBtn from '../../interfaces/IPrimePopupBtnProps';
 function PrimePopupBtn({ handleMouseEnter, handleMouseLeave, popupPrimeBtn }: IPrimePopupBtn) {
   return (
     <div>
-      <div className="absolute -left-[0px] w-full h-[300vh] bg-bgBlackShadow z-20"></div>
+      <div className="absolute -left-[0px] w-full h-[300vh] bg-bgBlackShadow z-10"></div>
       <div
-        className="absolute top-full left-[507.5px] rounded transform -translate-x-[58px] bg-white shadow-lg z-30"
+        className="absolute top-full left-[507.5px] rounded transform -translate-x-[58px] bg-white shadow-lg z-10"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >

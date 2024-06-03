@@ -3,9 +3,9 @@ import ILoginPopupBtnProps from '../../interfaces/ILoginPopupBtnProps';
 function LoginPopupBtn({ handleMouseEnter, handleMouseLeave }: ILoginPopupBtnProps) {
   return (
     <div>
-      <div className="absolute -right-[0px] w-full h-[300vh] bg-bgBlackShadow z-20"></div>
+      <div className="absolute -right-[0px] w-full h-[300vh] bg-bgBlackShadow z-10"></div>
       <div
-        className="absolute right-[30px] rounded transform -translate-x-[58px] bg-white shadow-lg z-30"
+        className="absolute right-[30px] rounded transform -translate-x-[58px] bg-white shadow-lg z-10"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >

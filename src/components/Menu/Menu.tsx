@@ -10,7 +10,7 @@ import './menu.css';
 
 function Menu() {
   const uKey = uniqueId('key');
-  const { closeMenuModal, setIsModalOpen } = useContext<IMenuContextProps>(
+  const { isModalOpen, closeMenuModal, setIsModalOpen } = useContext<IMenuContextProps>(
     MenuContext as React.Context<IMenuContextProps>
   );
 
@@ -19,7 +19,7 @@ function Menu() {
   };
 
   return (
-    <div className="bg-bgBlackShadow flex absolute w-full z-50" onClick={onDismiss}>
+    <div className={`flex ${isModalOpen ? 'menu-open' : 'menu-close'}`} onClick={onDismiss}>
       <div className="menu-bar w-[365px] bg-white">
         <div className="bg-bgNav h-[50px]">
           <h1 className="h-full text-[18px] pl-7 flex justify-start items-center font-bold">
@@ -27,7 +27,7 @@ function Menu() {
             <span className="pl-2">Olá, faça seu login</span>
           </h1>
         </div>
-        <div className="menu-bar-ul overflow-scroll overflow-x-hidden">
+        <div className="menu-bar-ul overflow-y-scroll">
           {menuListData.data.map((data, index) => (
             <ul key={uKey()}>
               <h1 className="pt-5 pl-9 pb-1 text-[16.8px] text-black font-bold">{data.title}</h1>

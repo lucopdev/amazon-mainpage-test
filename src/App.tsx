@@ -1,23 +1,30 @@
-import React, { Suspense, lazy, useContext } from 'react';
+import React, { Suspense, lazy, useContext, useEffect } from 'react';
 
 import NavigationBar from './components/NavigationBar/NavigationBar';
 import IMenuContextProps from './interfaces/IMenuContextProps';
 import Header from './components/Header/Header';
 import MenuContext from './context/MenuContext';
 
-import './App.css';
+import Menu from './components/Menu/Menu';
 
 const ProductComponent = lazy(() => import('./components/ProductComponent/ProductComponent'));
 const Footer = lazy(() => import('./components/Footer/Footer'));
 
 function App() {
-  const { menuModal, isModalOpen } = useContext<IMenuContextProps>(
+  const { isModalOpen } = useContext<IMenuContextProps>(
     MenuContext as React.Context<IMenuContextProps>
   );
 
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+  }, [isModalOpen]);
+
   return (
-    <main className={`${isModalOpen && 'lock-screen'}`}>
-      {isModalOpen && menuModal}
+    <main>
       <div className="flex flex-col items-center min-w-[1200px]">
         <Header />
         <NavigationBar />
@@ -25,6 +32,12 @@ function App() {
           <ProductComponent />
           <Footer />
         </Suspense>
+        {isModalOpen && (
+          <div
+            className={`${'absolute bg-bgBlackShadow h-[300vw] w-full overflow-hidden z-50'}`}
+          ></div>
+        )}
+        <Menu />
       </div>
     </main>
   );
