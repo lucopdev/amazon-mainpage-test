@@ -36,7 +36,10 @@ function HeaderSlider({ slides }: IHeaderSlider) {
       <div className="w-[95%] flex items-center justify-center relative">
         <div className="w-full flex overflow-x-hidden" ref={carousel}>
           {slides.map((slide) => (
-            <img key={uKey()} src={slide} />
+           <div key={uKey()} className="relative min-w-full">
+           <img src={slide} className="w-full h-auto object-cover" />
+           <div className="absolute inset-0 bg-gradient-to-b"></div>
+         </div>
           ))}
           <div className="w-full h-full flex justify-between">
             <button

@@ -7,6 +7,9 @@ export default {
       tablet: '1200px',
     },
     extend: {
+      backgroundImage: {
+        'gradient-to-b': 'linear-gradient(to top, #e3e6e6, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0))',
+      },
       colors: {
         bgBlackShadow: '#000000b3',
         bgMainTheme: '#e3e6e6',
