@@ -50,7 +50,7 @@ function BodySlider({ slides, width = '100%', height = '100%' }: IBodySlider) {
             </span>
           </button>
           <div
-            className="w-full flex items-center justify-between overflow-x-scroll"
+            className="w-full flex items-center justify-between overflow-x-scroll no-scrollbar"
             ref={carousel}
           >
             {slides?.map((slide, index) => (

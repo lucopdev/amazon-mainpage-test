@@ -33,5 +33,54 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        '.no-scrollbar::-webkit-scrollbar': {
+          display: 'none',
+        },
+        '.no-scrollbar': {
+          'scrollbar-width': 'none',
+          '-ms-overflow-style': 'none',
+        },
+        '.custom-select': {
+          'padding-right': '20px',
+          appearance: 'none',
+          '-webkit-appearance': 'none',
+          '-moz-appearance': 'none',
+          position: 'relative',
+          width: 'auto',
+        },
+        '.custom-select-container::after': {
+          content: '"\\25BC"',
+          position: 'absolute',
+          right: '5px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          'pointer-events': 'none',
+          'font-size': '12px',
+          color: '#555855',
+          'background-color': '#e6e6e6',
+          width: '15px',
+        },
+        '.custom-select-container:hover::after': {
+          color: '#333',
+          'background-color': '#d4d4d4',
+        },
+        '.custom-select:focus': {
+          'border-color': 'none',
+          outline: 'none',
+        },
+        '.menu-bar-ul': {
+          height: 'calc(100vh - 50px)',
+        },
+        '.menu-open': {
+          transition: 'left 0.4s ease',
+        },
+        '.menu-close': {
+          transition: 'left 0.5s ease',
+        },
+      });
+    },
+  ],
 };

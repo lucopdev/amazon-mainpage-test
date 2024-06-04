@@ -6,8 +6,6 @@ import menuListData from '../../mockedData/menuListData.json';
 import MenuContext from '../../context/MenuContext';
 import uniqueId from 'uniqueid';
 
-import './menu.css';
-
 function Menu() {
   const uKey = uniqueId('key');
   const { isModalOpen, closeMenuModal } = useContext<IMenuContextProps>(
@@ -15,7 +13,7 @@ function Menu() {
   );
 
   return (
-    <div className={`flex ${isModalOpen ? 'menu-open' : 'menu-close'}`}>
+    <div className={`flex ${isModalOpen ? 'menu-open left-0 absolute z-30' : 'menu-close left-[-400px] absolute z-30'}`}>
       <div className="menu-bar w-[365px] bg-white">
         <div className="bg-bgNav h-[50px]">
           <h1 className="h-full text-[18px] pl-7 flex justify-start items-center font-bold">
@@ -45,7 +43,10 @@ function Menu() {
         </div>
       </div>
       <div className="absolute w-10 top-0 -right-[40px] items-center justify-center">
-        <button className="w-full h-[45px] flex items-center justify-center" onClick={closeMenuModal}>
+        <button
+          className="w-full h-[45px] flex items-center justify-center"
+          onClick={closeMenuModal}
+        >
           <h1 className="text-[35px]">x</h1>
         </button>
       </div>

@@ -11,8 +11,6 @@ import localLogo from '../../assets/images/local.png';
 import ApiContext from '../../context/ApiContext';
 import uniqueId from 'uniqueid';
 
-import './header.css';
-
 function Header() {
   const uKey = uniqueId('key');
   const { categories } = useContext<IApiContextProps>(
@@ -22,10 +20,14 @@ function Header() {
     CepConsultContext as React.Context<ICepConsultContextProps>
   );
 
+  const [isTextInputSelected, setIsTextInputSelected] = useState(false);
+  const [isSelectInputSelected, setIsSelectInputSelected] = useState(false);
+  const [isSearchBtnSelected, setIsSearchBtnSelected] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string>('Todos');
   const [showPopup, setShowPopup] = useState(false);
   const selectRef = useRef<HTMLSelectElement>(null);
   const spanRef = useRef<HTMLSpanElement>(null);
+  const inputContainerRef = useRef<HTMLDivElement>(null);
 
   const adjustSelectWidth = () => {
     if (selectRef.current && spanRef.current) {
@@ -45,13 +47,46 @@ function Header() {
     setShowPopup(false);
   };
 
-  useEffect(() => {
-    adjustSelectWidth();
-  }, [selectedOption]);
+  const onTextInputFocus = () => {
+    setIsTextInputSelected(true);
+    setIsSelectInputSelected(false);
+    setIsSearchBtnSelected(false);
+  };
+
+  const onSelectInputFocus = () => {
+    setIsSelectInputSelected(true);
+    setIsTextInputSelected(false);
+    setIsSearchBtnSelected(false);
+  };
+
+  const onSearchBtnFocus = () => {
+    setIsSearchBtnSelected(true);
+    setIsSelectInputSelected(false);
+    setIsTextInputSelected(false);
+  };
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(e.target.value);
   };
+
+  useEffect(() => {
+    adjustSelectWidth();
+  }, [selectedOption]);
+
+  useEffect(() => {
+    const inputContainer = inputContainerRef.current;
+    const handleFocusOut = () => {
+      setIsSearchBtnSelected(false);
+      setIsSelectInputSelected(false);
+      setIsTextInputSelected(false);
+    };
+
+    inputContainer && inputContainer.addEventListener('focusout', handleFocusOut);
+
+    return () => {
+      inputContainer && inputContainer.removeEventListener('focusout', handleFocusOut);
+    };
+  }, []);
 
   return (
     <header className="flex flex-row justify-between items-center w-full h-[60px] text-white bg-bgHeader pr-2 relative">
@@ -61,7 +96,7 @@ function Header() {
         alt="Logo"
       />
       <button
-        className="flex border border-bgHeader hover:border hover:border-white h-[48px] pl-3 pr-5 text-left"
+        className="flex border border-bgHeader hover:border hover:border-white h-[48px] mr-5 pl-3 pr-5 text-left"
         onClick={openCepMenu}
       >
         <img className="mt-[15px]" src={localLogo} />
@@ -72,8 +107,20 @@ function Header() {
           <span className="font-bold text-[14px]">{cepData ? cepData.cep : 'Atualizar Local'}</span>
         </div>
       </button>
-      <div className="flex flex-grow h-[40px] pl-3 pr-3 items-center">
-        <div className="custom-select-container flex h-[40px] items-center relative">
+      <div
+        className={`input-container flex flex-grow h-[40px] items-center ${
+          isTextInputSelected &&
+          'outline-offset-0 outline-none outline-[3px] outline-orange-400 border-none rounded'
+        }`}
+        ref={inputContainerRef}
+      >
+        <div
+          className={`custom-select-container flex h-[40px] items-center relative ${
+            isSelectInputSelected &&
+            'outline-offset-0 outline-none outline-[3px] outline-orange-400 border-none rounded-tl rounded-bl'
+          }`}
+          onFocus={onSelectInputFocus}
+        >
           <select
             className="h-full custom-select pl-3 pr-2 text-[11px] bg-selectCategoryBtn text-darkTextColor rounded-bl-[4px] rounded-tl-[4px] border-r-[1px] border-gray-300 hover:bg-hoverSelectCategoryBtn hover:text-black"
             value={selectedOption}
@@ -103,19 +150,26 @@ function Header() {
         </div>
         <input
           type="text"
-          className="flex-grow h-full text-[14px] placeholder-slate-600 pl-[6px] ring-orange-400 outline-orange-400 focus:outline-none focus:ring-4"
+          className="flex-grow h-full text-[14px] placeholder-slate-600 pl-[6px] border-none outline-none ring-0"
           placeholder="Pesquisa Amazon.com.br"
+          onFocus={onTextInputFocus}
         />
-        <button className="h-full bg-searchBtn rounded-tr-[4px] pl-[1.5px] rounded-br-[4px] text-black">
-          <img src={magGlass} alt="Search" />
+        <button
+          className={`w-[40px] h-full bg-searchBtn rounded-tr-[4px] rounded-br-[4px] ${
+            isSearchBtnSelected &&
+            'outline-offset-0 outline-none outline-[3px] outline-orange-400 border-none rounded-tr rounded-br'
+          }`}
+          onFocus={onSearchBtnFocus}
+        >
+          <img className="rounded" src={magGlass} />
         </button>
       </div>
 
-      <div className="border border-bgHeader hover:border hover:border-white h-[48px] pl-1 pr-1 z-30">
+      <div className="border border-bgHeader hover:border hover:border-white h-[48px] ml-5 pl-1 pr-1 z-30">
         <button
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className="text-nowrap h-full border-bgNav hover:border-0 hover:border-white"
+          className="h-full text-start border-bgNav hover:border-0 hover:border-white"
         >
           <p className="text-[11.5px]">Olá, faça seu login</p>
           <p className="text-[13px] font-bold">Contas e Listas &#9660;</p>
