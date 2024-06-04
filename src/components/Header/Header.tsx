@@ -10,22 +10,26 @@ import options from '../../mockedData/categoriesMock';
 import headerLogo from '../../assets/images/logo.png';
 import localLogo from '../../assets/images/local.png';
 import uniqueId from 'uniqueid';
+import SearchInputPopUp from '../SearchInputPopUp/SearchInputPopUp';
 
-function Header({ handleShadowScreen }: IHeaderProps) {
+function Header({ handleShadowScreen, isInputFocused }: IHeaderProps) {
   const uKey = uniqueId('key');
 
   const { cepData, openCepMenu } = useContext<ICepConsultContextProps>(
     CepConsultContext as React.Context<ICepConsultContextProps>
   );
-
+  const [showPopup, setShowPopup] = useState(false);
+  const [inputSearch, setInputSearch] = useState('');
+  const [searchHistory, setSearchHistory] = useState<string[]>([]);
   const [isTextInputSelected, setIsTextInputSelected] = useState(false);
   const [isSelectInputSelected, setIsSelectInputSelected] = useState(false);
+  const [inputSize, setInputSize] = useState<number | undefined>(undefined);
   const [isSearchBtnSelected, setIsSearchBtnSelected] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string>('Todos');
-  const [showPopup, setShowPopup] = useState(false);
+  const inputContainerRef = useRef<HTMLDivElement>(null);
+  const inputSearchRef = useRef<HTMLInputElement>(null);
   const selectRef = useRef<HTMLSelectElement>(null);
   const spanRef = useRef<HTMLSpanElement>(null);
-  const inputContainerRef = useRef<HTMLDivElement>(null);
 
   const adjustSelectWidth = () => {
     if (selectRef.current && spanRef.current) {
@@ -34,6 +38,22 @@ function Header({ handleShadowScreen }: IHeaderProps) {
       spanRef.current.textContent = selectedLabel;
       const width = spanRef.current.offsetWidth;
       selectRef.current.style.width = `${width + 35}px`;
+    }
+  };
+
+  const handleInputSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setInputSearch(value);
+  };
+
+  const onSubmit = () => {
+    setSearchHistory((prevState) => [...prevState, inputSearch]);
+    setInputSearch('');
+  };
+
+  const submitWithEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      onSubmit();
     }
   };
 
@@ -75,6 +95,17 @@ function Header({ handleShadowScreen }: IHeaderProps) {
     setIsTextInputSelected(false);
   };
 
+  const handleResizeInputSearch = () => {
+    setInputSize(inputSearchRef.current?.offsetWidth);
+  };
+
+  useEffect(() => {
+    handleResizeInputSearch();
+    window.addEventListener('resize', handleResizeInputSearch);
+
+    return () => window.removeEventListener('resize', handleResizeInputSearch);
+  }, [inputSearchRef]);
+
   useEffect(() => {
     if (showPopup) {
       handleShadowScreen(false);
@@ -88,7 +119,6 @@ function Header({ handleShadowScreen }: IHeaderProps) {
 
   useEffect(() => {
     const inputContainer = inputContainerRef.current;
-
     inputContainer && inputContainer.addEventListener('focusout', handleFocusOut);
 
     return () => {
@@ -98,11 +128,14 @@ function Header({ handleShadowScreen }: IHeaderProps) {
 
   return (
     <header className="flex flex-row justify-between items-center w-full h-[60px] text-white bg-bgHeader pr-2 relative">
-      <img
-        className="border border-bgHeader ml-3 h-[48px] hover:border hover:border-white"
-        src={headerLogo}
-        alt="Logo"
-      />
+      {isInputFocused && <SearchInputPopUp searchHistory={searchHistory} width={inputSize?.toString()} inputSearchRef={inputSearchRef} />}
+      <button>
+        <img
+          className="border border-bgHeader ml-3 h-[48px] hover:border hover:border-white"
+          src={headerLogo}
+          alt="Logo"
+        />
+      </button>
       <button
         className="flex border border-bgHeader hover:border hover:border-white h-[48px] mr-5 pl-3 pr-5 text-left"
         onClick={openCepMenu}
@@ -147,9 +180,15 @@ function Header({ handleShadowScreen }: IHeaderProps) {
           ></span>
         </div>
         <input
+          ref={inputSearchRef}
           type="text"
           className="flex-grow h-full text-[14px] placeholder-slate-600 pl-[6px] border-none outline-none ring-0 text-black"
+          autoComplete="off"
           placeholder="Pesquisa Amazon.com.br"
+          value={inputSearch}
+          name="inputSearch"
+          onChange={(event) => handleInputSearchChange(event)}
+          onKeyDown={(event) => submitWithEnter(event)}
           onFocus={onTextInputFocus}
         />
         <button
@@ -158,6 +197,7 @@ function Header({ handleShadowScreen }: IHeaderProps) {
             'outline-offset-0 outline-none outline-[3px] outline-orange-400 border-none rounded-tr rounded-br'
           }`}
           onFocus={onSearchBtnFocus}
+          onClick={onSubmit}
         >
           <img className="rounded" src={magGlass} />
         </button>

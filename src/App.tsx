@@ -38,11 +38,11 @@ function App() {
   return (
     <main>
       <div className="flex flex-col items-center min-w-[1200px]">
-        <Header handleShadowScreen={handleShadowScreen} />
+        <Header handleShadowScreen={handleShadowScreen} isInputFocused={isInputFocused} />
         <NavigationBar />
         {isInputFocused && !isModalOpen && !isCepConsultOpen && (
           <div
-            className="absolute left-0 bg-bgBlackShadow w-full top-[100px] h-full z-50"
+            className="absolute left-0 bg-bgBlackShadow w-full top-[100px] h-full z-40"
             onClick={() => handleShadowScreen}
           ></div>
         )}
