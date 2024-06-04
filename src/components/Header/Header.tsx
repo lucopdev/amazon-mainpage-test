@@ -66,7 +66,9 @@ function Header() {
       >
         <img className="mt-[15px]" src={localLogo} />
         <div>
-          <p className="text-[12px]">{cepData ? 'Enviar para' : 'A entrega será feita em Bela Vista 01319900'}</p>
+          <p className="text-[12px]">
+            {cepData ? 'Enviar para' : 'A entrega será feita em Bela Vista 01319900'}
+          </p>
           <span className="font-bold text-[14px]">{cepData ? cepData.cep : 'Atualizar Local'}</span>
         </div>
       </button>
@@ -79,7 +81,7 @@ function Header() {
             ref={selectRef}
           >
             <option
-              className="custom-options text-[13px]"
+              className="text-[13px]"
               label="Todos os departamentos"
               value="Todos os departamentos"
             >
@@ -90,6 +92,9 @@ function Header() {
                 {option.name}
               </option>
             ))}
+            <option className="invisible">
+              ______________________________________________________
+            </option>
           </select>
           <span
             ref={spanRef}
@@ -98,7 +103,7 @@ function Header() {
         </div>
         <input
           type="text"
-          className="flex-grow h-full text-[14px] placeholder-slate-600 placeholder pl-[6px] text-black"
+          className="flex-grow h-full text-[14px] placeholder-slate-600 pl-[6px] ring-orange-400 outline-orange-400 focus:outline-none focus:ring-4"
           placeholder="Pesquisa Amazon.com.br"
         />
         <button className="h-full bg-searchBtn rounded-tr-[4px] pl-[1.5px] rounded-br-[4px] text-black">

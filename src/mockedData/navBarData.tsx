@@ -1,0 +1,26 @@
+const titles = [
+  'Vendas na Amazon',
+  'Mais Vendidos',
+  'Ofertas do dia',
+  'Prime',
+  'Livros',
+  'Música',
+  'Ideias de Presente',
+  'Eletrônicos',
+  'Novidades na Amazon',
+  'Computadores',
+  'Casa',
+  'Amazon Moda',
+  'Beleza',
+  'Games',
+  'Cuidados Pessoais',
+  'Brinquedos e Jogos',
+  'Alimentos e Bebidas',
+  'Ferramentas e Construção',
+  'Bebês',
+  'Automotivos',
+  'Pet Shop',
+  'Atendimento ao Cliente',
+];
+
+export default titles;

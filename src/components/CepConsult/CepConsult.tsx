@@ -1,7 +1,8 @@
 import { ChangeEvent, useContext, useState } from 'react';
-import { getCep } from '../../services/api';
+
 import ICepConsultContextProps from '../../interfaces/ICepConsultContextProps';
 import CepConsultContext from '../../context/CepConsultContext';
+import { getCep } from '../../services/api';
 
 function CepConsult() {
   const { setCepData, closeCepMenu } = useContext<ICepConsultContextProps>(
