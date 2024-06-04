@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useContext, useEffect } from 'react';
+import React, { Suspense, lazy, useContext, useEffect, useState } from 'react';
 
 import ICepConsultContextProps from './interfaces/ICepConsultContextProps';
 import NavigationBar from './components/NavigationBar/NavigationBar';
@@ -16,23 +16,36 @@ function App() {
   const { isModalOpen, closeMenuModal } = useContext<IMenuContextProps>(
     MenuContext as React.Context<IMenuContextProps>
   );
+
   const { isCepConsultOpen, closeCepMenu } = useContext<ICepConsultContextProps>(
     CepConsultContext as React.Context<ICepConsultContextProps>
   );
 
+  const [isInputFocused, setIsInputFocused] = useState(false);
+
+  const handleShadowScreen = (bool: boolean) => {
+    setIsInputFocused(bool);
+  };
+
   useEffect(() => {
-    if (isModalOpen || isCepConsultOpen) {
+    if (isModalOpen || isCepConsultOpen || isInputFocused) {
       document.body.classList.add('overflow-hidden');
     } else {
       document.body.classList.remove('overflow-hidden');
     }
-  }, [isModalOpen, isCepConsultOpen]);
+  }, [isModalOpen, isCepConsultOpen, isInputFocused]);
 
   return (
     <main>
       <div className="flex flex-col items-center min-w-[1200px]">
-        <Header />
+        <Header handleShadowScreen={handleShadowScreen} />
         <NavigationBar />
+        {isInputFocused && !isModalOpen && !isCepConsultOpen && (
+          <div
+            className="absolute left-0 bg-bgBlackShadow w-full top-[100px] h-full z-50"
+            onClick={() => handleShadowScreen}
+          ></div>
+        )}
         <Suspense fallback={<div className="w-full h-full"></div>}>
           <ProductComponent />
           <Footer />

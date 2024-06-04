@@ -14,7 +14,7 @@ function NavigationBar() {
     MenuContext as React.Context<IMenuContextProps>
   );
 
-  const [maxArrayDisplay, setMaxArrayDisplay] = useState(11);
+  const [maxArrayDisplay, setMaxArrayDisplay] = useState<number | undefined>(undefined);
   const [showPopup, setShowPopup] = useState(false);
   const barRef = useRef<HTMLDivElement>(null);
   const barContentRef = useRef(null);
@@ -24,7 +24,6 @@ function NavigationBar() {
     if (barRef.current && barContentRef) {
       const itemQuantity = Math.round(barRef.current.offsetWidth / avarageDivSizeInPixels);
       setMaxArrayDisplay(itemQuantity);
-      console.log(itemQuantity);
     }
   };
 
@@ -38,7 +37,9 @@ function NavigationBar() {
 
   window.addEventListener('resize', calculateContentSize);
 
-  useEffect(() => {}, [maxArrayDisplay]);
+  useEffect(() => {
+    calculateContentSize();
+  }, []);
 
   return (
     <nav className="flex w-full justify-between h-[40px] bg-bgNav text-white pl-3 pr-3 relative ">

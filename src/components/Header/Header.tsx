@@ -1,21 +1,19 @@
 import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
 
 import ICepConsultContextProps from '../../interfaces/ICepConsultContextProps';
-import IApiContextProps from '../../interfaces/IApiContextProps';
 import CepConsultContext from '../../context/CepConsultContext';
 import magGlass from '../../assets/images/mag_glass_icon.png';
 import LoginPopupBtn from '../LoginPopupBtn/LoginPopupBtn';
+import IHeaderProps from '../../interfaces/IHeaderProps';
 import cartIcon from '../../assets/images/cart_icon.png';
+import options from '../../mockedData/categoriesMock';
 import headerLogo from '../../assets/images/logo.png';
 import localLogo from '../../assets/images/local.png';
-import ApiContext from '../../context/ApiContext';
 import uniqueId from 'uniqueid';
 
-function Header() {
+function Header({ handleShadowScreen }: IHeaderProps) {
   const uKey = uniqueId('key');
-  const { categories } = useContext<IApiContextProps>(
-    ApiContext as React.Context<IApiContextProps>
-  );
+
   const { cepData, openCepMenu } = useContext<ICepConsultContextProps>(
     CepConsultContext as React.Context<ICepConsultContextProps>
   );
@@ -32,7 +30,7 @@ function Header() {
   const adjustSelectWidth = () => {
     if (selectRef.current && spanRef.current) {
       const selectedLabel =
-        categories?.find((option) => option.name === selectedOption)?.name || 'Todos';
+        options?.find((option) => option.value === selectedOption)?.value || 'Todos';
       spanRef.current.textContent = selectedLabel;
       const width = spanRef.current.offsetWidth;
       selectRef.current.style.width = `${width + 35}px`;
@@ -48,6 +46,7 @@ function Header() {
   };
 
   const onTextInputFocus = () => {
+    handleShadowScreen(true);
     setIsTextInputSelected(true);
     setIsSelectInputSelected(false);
     setIsSearchBtnSelected(false);
@@ -69,17 +68,26 @@ function Header() {
     setSelectedOption(e.target.value);
   };
 
+  const handleFocusOut = () => {
+    handleShadowScreen(false);
+    setIsSearchBtnSelected(false);
+    setIsSelectInputSelected(false);
+    setIsTextInputSelected(false);
+  };
+
+  useEffect(() => {
+    if (showPopup) {
+      handleShadowScreen(false);
+      handleFocusOut();
+    }
+  }, [showPopup]);
+
   useEffect(() => {
     adjustSelectWidth();
   }, [selectedOption]);
 
   useEffect(() => {
     const inputContainer = inputContainerRef.current;
-    const handleFocusOut = () => {
-      setIsSearchBtnSelected(false);
-      setIsSelectInputSelected(false);
-      setIsTextInputSelected(false);
-    };
 
     inputContainer && inputContainer.addEventListener('focusout', handleFocusOut);
 
@@ -127,21 +135,11 @@ function Header() {
             onChange={handleChange}
             ref={selectRef}
           >
-            <option
-              className="text-[13px]"
-              label="Todos os departamentos"
-              value="Todos os departamentos"
-            >
-              Todos os departamentos
-            </option>
-            {categories?.map((option) => (
-              <option key={uKey()} className="text-[13px]" value={option.name}>
-                {option.name}
+            {options?.map((option) => (
+              <option key={uKey()} className="pr-3 text-[13.5px]" value={option.value}>
+                {option.label}
               </option>
             ))}
-            <option className="invisible">
-              ______________________________________________________
-            </option>
           </select>
           <span
             ref={spanRef}
@@ -150,7 +148,7 @@ function Header() {
         </div>
         <input
           type="text"
-          className="flex-grow h-full text-[14px] placeholder-slate-600 pl-[6px] border-none outline-none ring-0"
+          className="flex-grow h-full text-[14px] placeholder-slate-600 pl-[6px] border-none outline-none ring-0 text-black"
           placeholder="Pesquisa Amazon.com.br"
           onFocus={onTextInputFocus}
         />

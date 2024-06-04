@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, RefObject } from 'react';
+import { useRef, RefObject } from 'react';
 
 import IHeaderSlider from '../../interfaces/IHeaderSlider';
 import uniqueId from 'uniqueid';
@@ -7,50 +7,45 @@ function HeaderSlider({ slides }: IHeaderSlider) {
   const uKey = uniqueId();
   const carousel: RefObject<HTMLDivElement> = useRef(null);
 
-  const [duplicatedSlides, setDuplicatedSlides] = useState<string[]>([]);
-
-  useEffect(() => {
-    setDuplicatedSlides([...slides, ...slides]);
-  }, [slides]);
-
-  const handleScroll = () => {
-    if (carousel.current) {
-      const scrollLeft = carousel.current.scrollLeft;
-      const scrollWidth = carousel.current.scrollWidth;
-      const offsetWidth = carousel.current.offsetWidth;
-
-      if (scrollLeft === 0) {
-        carousel.current.scrollLeft = scrollWidth / 2 - offsetWidth;
-      } else if (scrollLeft + offsetWidth >= scrollWidth) {
-        carousel.current.scrollLeft = scrollWidth / 2;
-      }
-    }
-  };
-
   const slideLeft = () => {
     if (carousel.current) {
-      carousel.current.scrollBy({
-        left: -carousel.current.offsetWidth,
-        behavior: 'smooth',
-      });
+      if (carousel.current.scrollLeft === 0) {
+        carousel.current.scrollTo({
+          left: carousel.current.offsetWidth * slides.length,
+        });
+      } else {
+        carousel.current.scrollBy({
+          left: -carousel.current.offsetWidth,
+          behavior: 'smooth',
+        });
+      }
     }
   };
 
   const slideRight = () => {
     if (carousel.current) {
-      carousel.current.scrollBy({
-        left: carousel.current.offsetWidth,
-        behavior: 'smooth',
-      });
+      if (
+        carousel.current.scrollLeft + carousel.current.offsetWidth ===
+        carousel.current.scrollWidth
+      ) {
+        carousel.current.scrollTo({
+          left: 0,
+        });
+      } else {
+        carousel.current.scrollBy({
+          left: carousel.current.offsetWidth,
+          behavior: 'smooth',
+        });
+      }
     }
   };
 
   return (
     <div className="w-full flex items-center justify-center">
       <div className="w-[95%] flex items-center justify-center relative">
-        <div className="w-full flex overflow-x-hidden" ref={carousel} onScroll={handleScroll}>
-          {duplicatedSlides.map((slide, index) => (
-            <div key={uKey() + index} className="relative min-w-full">
+        <div className="w-full flex overflow-x-hidden" ref={carousel}>
+          {slides.map((slide) => (
+            <div key={uKey()} className="relative min-w-full">
               <img src={slide} className="w-full h-auto object-cover" />
               <div className="absolute inset-0 bg-gradient-to-b"></div>
             </div>

@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useContext } from 'react';
 
 import IApiContextProps from '../../interfaces/IApiContextProps';
-import { slides, logoSlides } from '../../mockedData/images';
+import { slides, logoSlides } from '../../mockedData/logoSlides';
 import HeaderSlider from '../HeaderSlider/HeaderSlider';
 import ProductGrid from '../ProductGrid/ProductGrid';
 import ICategory from '../../interfaces/ICategory';
