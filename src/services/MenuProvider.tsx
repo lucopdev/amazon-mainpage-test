@@ -6,24 +6,24 @@ interface MenuProviderProps {
 }
 
 function MenuProvider({ children }: MenuProviderProps) {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isMenuModalOpen, setIsMenuModalOpen] = useState<boolean>(false);
 
   const openMenuModal = () => {
-    setIsModalOpen(true);
+    setIsMenuModalOpen(true);
   };
 
   const closeMenuModal = () => {
-    setIsModalOpen(false);
+    setIsMenuModalOpen(false);
   };
 
   const values = useMemo(
     () => ({
-      isModalOpen,
-      setIsModalOpen,
+      isMenuModalOpen,
+      setIsMenuModalOpen,
       openMenuModal,
       closeMenuModal,
     }),
-    [isModalOpen, setIsModalOpen]
+    [isMenuModalOpen, setIsMenuModalOpen]
   );
 
   return <MenuContext.Provider value={values}>{children}</MenuContext.Provider>;

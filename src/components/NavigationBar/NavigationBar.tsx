@@ -7,15 +7,16 @@ import PrimePopupBtn from '../PrimePopupBtn/PrimePopupBtn';
 import MenuContext from '../../context/MenuContext';
 import titles from '../../mockedData/navBarData';
 import uniqueId from 'uniqueid';
+import INavigationBarProps from '../../interfaces/INavigationBarProps';
 
-function NavigationBar() {
+function NavigationBar({ setIsInputSearchFocused }: INavigationBarProps) {
   const uKey = uniqueId('key');
   const { openMenuModal } = useContext<IMenuContextProps>(
     MenuContext as React.Context<IMenuContextProps>
   );
 
   const [maxArrayDisplay, setMaxArrayDisplay] = useState<number | undefined>(undefined);
-  const [showPopup, setShowPopup] = useState(false);
+  const [showLoginPopUp, setShowLoginPopUp] = useState(false);
   const barRef = useRef<HTMLDivElement>(null);
   const barContentRef = useRef(null);
 
@@ -28,11 +29,12 @@ function NavigationBar() {
   };
 
   const handleMouseEnter = () => {
-    setShowPopup(true);
+    setIsInputSearchFocused(false);
+    setShowLoginPopUp(true);
   };
 
   const handleMouseLeave = () => {
-    setShowPopup(false);
+    setShowLoginPopUp(false);
   };
 
   window.addEventListener('resize', calculateContentSize);
@@ -64,7 +66,7 @@ function NavigationBar() {
                 >
                   <span className="text-[13.5px] pl-2 pr-2">{title} &#9660;</span>
                 </button>
-                {showPopup && (
+                {showLoginPopUp && (
                   <PrimePopupBtn
                     handleMouseEnter={handleMouseEnter}
                     handleMouseLeave={handleMouseLeave}

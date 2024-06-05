@@ -14,7 +14,7 @@ const ProductComponent = lazy(() => import('./components/ProductComponent/Produc
 const Footer = lazy(() => import('./components/Footer/Footer'));
 
 function App() {
-  const { isModalOpen, closeMenuModal } = useContext<IMenuContextProps>(
+  const { isMenuModalOpen, closeMenuModal } = useContext<IMenuContextProps>(
     MenuContext as React.Context<IMenuContextProps>
   );
 
@@ -22,26 +22,26 @@ function App() {
     CepConsultContext as React.Context<ICepConsultContextProps>
   );
 
-  const [isInputFocused, setIsInputFocused] = useState(false);
+  const [isInputSearchFocused, setIsInputSearchFocused] = useState(false);
 
   const handleShadowScreen = (bool: boolean) => {
-    setIsInputFocused(bool);
+    setIsInputSearchFocused(bool);
   };
 
   useEffect(() => {
-    if (isModalOpen || isCepConsultOpen || isInputFocused) {
+    if (isMenuModalOpen || isCepConsultOpen || isInputSearchFocused) {
       document.body.classList.add('overflow-hidden');
     } else {
       document.body.classList.remove('overflow-hidden');
     }
-  }, [isModalOpen, isCepConsultOpen, isInputFocused]);
+  }, [isMenuModalOpen, isCepConsultOpen, isInputSearchFocused]);
 
   return (
     <main>
       <div className="flex flex-col items-center min-w-[1200px]">
         <Header handleShadowScreen={handleShadowScreen} />
-        <NavigationBar />
-        {isInputFocused && !isModalOpen && !isCepConsultOpen && (
+        <NavigationBar setIsInputSearchFocused={setIsInputSearchFocused} />
+        {isInputSearchFocused && !isMenuModalOpen && !isCepConsultOpen && (
           <div
             className="absolute left-0 bg-bgBlackShadow w-full top-[100px] h-full z-40"
             onClick={() => handleShadowScreen}
@@ -52,9 +52,9 @@ function App() {
           <Indications />
           <Footer />
         </Suspense>
-        {isModalOpen && (
+        {isMenuModalOpen && (
           <div
-            className="absolute bg-bgBlackShadow h-[300vw] w-full z-30"
+            className="absolute bg-bgBlackShadow left-0 h-[300vw] w-full z-30"
             onClick={closeMenuModal}
           ></div>
         )}

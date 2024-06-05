@@ -66,7 +66,7 @@ function FooterSlider({ products, width = '100%', height = '100%' }: IFooterSlid
           </div>
           <button
             onClick={slideRight}
-            className="w-[45px] h-[40px] bg-white shadow-md shadow-slate-300 border absolute rounded -right-5 top-[40%] pb-3 text-black flex items-center justify-center focus:rounded focus:border-2 focus:border-bgNav"
+            className="w-[45px] h-[40px] bg-white shadow-md shadow-slate-300 border absolute rounded -right-3 top-[40%] pb-3 text-black flex items-center justify-center focus:rounded focus:border-2 focus:border-bgNav"
           >
             <span className="leading-[10px] w-full h-full text-[40px] text-bgFooterBtnHover flex items-center justify-center hover:text-black">
               &#x0203A;

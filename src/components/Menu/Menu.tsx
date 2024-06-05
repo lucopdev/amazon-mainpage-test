@@ -8,12 +8,12 @@ import uniqueId from 'uniqueid';
 
 function Menu() {
   const uKey = uniqueId('key');
-  const { isModalOpen, closeMenuModal } = useContext<IMenuContextProps>(
+  const { isMenuModalOpen, closeMenuModal } = useContext<IMenuContextProps>(
     MenuContext as React.Context<IMenuContextProps>
   );
 
   return (
-    <div className={`flex ${isModalOpen ? 'menu-open left-0 absolute z-30' : 'menu-close left-[-400px] absolute z-30'}`}>
+    <div className={`flex ${isMenuModalOpen ? 'menu-open left-0 absolute z-30' : 'menu-close left-[-400px] absolute z-30'}`}>
       <div className="menu-bar w-[365px] bg-white">
         <div className="bg-bgNav h-[50px]">
           <h1 className="h-full text-[18px] pl-7 flex justify-start items-center font-bold">
