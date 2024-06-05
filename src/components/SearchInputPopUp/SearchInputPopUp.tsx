@@ -2,7 +2,15 @@ import { useEffect, useState } from 'react';
 import ISearchInputPopUpProps from '../../interfaces/ISearchInputPopUpProps';
 import uniqueId from 'uniqueid';
 
-function SearchInputPopUp({ searchHistory, width, inputSearchRef }: ISearchInputPopUpProps) {
+function SearchInputPopUp({
+  searchHistory,
+  width,
+  inputSearchRef,
+  setIsPopUpVisible,
+  setInputSearch,
+  handleShadowScreen,
+  onSubmit,
+}: ISearchInputPopUpProps) {
   const uKey = uniqueId();
   const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0 });
 
@@ -18,20 +26,31 @@ function SearchInputPopUp({ searchHistory, width, inputSearchRef }: ISearchInput
 
   const stylePopUp = {
     width: `${width}px`,
-    top: `${popupPosition.top + 1}px`,
+    top: `${popupPosition.top + 0.5}px`,
     left: `${popupPosition.left}px`,
     heigh: searchHistory.length,
+  };
+
+  const sendHistoryToInput = (event: React.MouseEvent<HTMLParagraphElement>) => {
+    setInputSearch(event.currentTarget.innerHTML);
+    handleShadowScreen(false);
+    setIsPopUpVisible(false);
+    onSubmit();
   };
 
   return (
     <div className="absolute bg-white z-50" style={stylePopUp}>
       {searchHistory.map((historyText: string) => (
-        <div key={uKey()} className="flex justify-center flex-col p-2 hover:bg-bgLiMenu">
+        <div key={uKey()} className="flex justify-center flex-col hover:bg-bgLiMenu">
           <div className="flex items-center justify-between">
-            <p className="text-black font-bold" key={historyText}>
+            <p
+              className="text-black font-bold text-[14px] w-full h-full p-2"
+              key={historyText}
+              onClick={(event) => sendHistoryToInput(event)}
+            >
               {historyText}
             </p>
-            <button className="text-black font-bold text-[16px]">X</button>
+            <button className="text-black w-[30px] h-[30px] font-bold text-[16px]">X</button>
           </div>
         </div>
       ))}
