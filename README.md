@@ -1,31 +1,47 @@
-# React + TypeScript + Vite
+# Amazon Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![page image](src/assets/images/amazontest.png)
 
-Currently, two official plugins are available:
+Este projeto visa replicar apenas a página principal da Amazon com todas as suas dinâmicas, alimentado com uma Fake API apenas para demonstração.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Características por Componente
 
-## Expanding the ESLint configuration
+### Header
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Botões "hover" estilizados escurecem a tela para destacar o objeto principal.
+- A barra de pesquisa guarda a informação pesquisada anteriormente num histórico que pode ser reutilizado ou deletado.
 
-- Configure the top-level `parserOptions` property like this:
+### Menu Hambúrguer
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- Menu principal com animação lateral de entrada e saída.
+- Escurece a tela e trava a rolagem.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-# amazon-mainpage-test
+### Corpo da Página
+
+- Slider superior infinito (precisa de reparo).
+- Cards de produtos e sliders secundários para visualização de produtos da mesma categoria.
+
+### Rodapé
+
+- Simulação do slider de itens baseado nas pesquisas e compras do usuário.
+- Footer com informações padrão do site.
+
+## Como Usar
+
+1. Clone este repositório.
+2. Instale as dependências usando `npm install`.
+3. Inicie o servidor de desenvolvimento com `npm run preview`.
+
+## Contribuindo
+
+Se quiser contribuir com este projeto, siga estes passos:
+
+1. Faça um fork do projeto.
+2. Crie uma nova branch com a sua feature (`git checkout -b feature/nova-feature`).
+3. Faça commit das suas mudanças (`git commit -m 'Adicionando nova feature'`).
+4. Faça push para a branch (`git push origin feature/nova-feature`).
+5. Abra um Pull Request.
+
+## Licença
+
+Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE.md](LICENSE.md) para mais detalhes.
