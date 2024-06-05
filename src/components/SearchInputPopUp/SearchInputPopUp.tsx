@@ -7,6 +7,7 @@ function SearchInputPopUp({
   width,
   inputSearchRef,
   setIsPopUpVisible,
+  setSearchHistory,
   setInputSearch,
   handleShadowScreen,
   onSubmit,
@@ -38,6 +39,16 @@ function SearchInputPopUp({
     onSubmit();
   };
 
+  const removeHistory = (event: React.MouseEvent<HTMLElement>) => {
+    const parent = event.currentTarget.parentElement;
+    if (parent && parent.firstChild && parent.firstChild instanceof HTMLElement) {
+      const { innerText } = parent.firstChild;
+
+      const historyFound = searchHistory.filter((historyText) => historyText !== innerText);
+      setSearchHistory(historyFound);
+    }
+  };
+
   return (
     <div className="absolute bg-white z-50" style={stylePopUp}>
       {searchHistory.map((historyText: string) => (
@@ -50,7 +61,12 @@ function SearchInputPopUp({
             >
               {historyText}
             </p>
-            <button className="text-black w-[30px] h-[30px] font-bold text-[16px]">X</button>
+            <button
+              className="text-black w-[30px] h-[30px] font-bold text-[16px]"
+              onClick={(event) => removeHistory(event)}
+            >
+              X
+            </button>
           </div>
         </div>
       ))}

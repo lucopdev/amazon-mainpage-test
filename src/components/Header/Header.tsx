@@ -142,6 +142,7 @@ function Header({ handleShadowScreen }: IHeaderProps) {
           <SearchInputPopUp
             handleShadowScreen={handleShadowScreen}
             setIsPopUpVisible={setIsPopUpVisible}
+            setSearchHistory={setSearchHistory}
             setInputSearch={setInputSearch}
             onSubmit={onSubmit}
             inputSearchRef={inputSearchRef}
