@@ -41,6 +41,10 @@ function Header({ handleShadowScreen, isInputFocused }: IHeaderProps) {
     }
   };
 
+  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSelectedOption(e.target.value);
+  };
+
   const handleInputSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setInputSearch(value);
@@ -84,10 +88,6 @@ function Header({ handleShadowScreen, isInputFocused }: IHeaderProps) {
     setIsTextInputSelected(false);
   };
 
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOption(e.target.value);
-  };
-
   const handleFocusOut = () => {
     handleShadowScreen(false);
     setIsSearchBtnSelected(false);
@@ -96,7 +96,9 @@ function Header({ handleShadowScreen, isInputFocused }: IHeaderProps) {
   };
 
   const handleResizeInputSearch = () => {
-    setInputSize(inputSearchRef.current?.offsetWidth);
+    if (inputSearchRef) {
+      setInputSize(inputSearchRef.current?.offsetWidth);
+    }
   };
 
   useEffect(() => {
@@ -104,7 +106,7 @@ function Header({ handleShadowScreen, isInputFocused }: IHeaderProps) {
     window.addEventListener('resize', handleResizeInputSearch);
 
     return () => window.removeEventListener('resize', handleResizeInputSearch);
-  }, [inputSearchRef]);
+  }, [inputSearchRef, inputSearch]);
 
   useEffect(() => {
     if (showPopup) {
@@ -128,7 +130,13 @@ function Header({ handleShadowScreen, isInputFocused }: IHeaderProps) {
 
   return (
     <header className="flex flex-row justify-between items-center w-full h-[60px] text-white bg-bgHeader pr-2 relative">
-      {isInputFocused && <SearchInputPopUp searchHistory={searchHistory} width={inputSize?.toString()} inputSearchRef={inputSearchRef} />}
+      {isInputFocused && (
+        <SearchInputPopUp
+          searchHistory={searchHistory}
+          width={inputSize?.toString()}
+          inputSearchRef={inputSearchRef}
+        />
+      )}
       <button>
         <img
           className="border border-bgHeader ml-3 h-[48px] hover:border hover:border-white"

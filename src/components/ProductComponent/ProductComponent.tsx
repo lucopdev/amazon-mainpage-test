@@ -23,7 +23,7 @@ function ProductComponent() {
       <div className="w-full flex absolute top-[100px] desktop:w-[1580px] min-w-[1200px]">
         <HeaderSlider slides={slides} />
       </div>
-      
+
       <Suspense />
       <div className="relative grid grid-cols-4 max-tablet:grid-cols-3 justify-center items-center mt-[240px] z-10">
         {categories?.slice(13, 17).map((category: ICategory, index: number) => (

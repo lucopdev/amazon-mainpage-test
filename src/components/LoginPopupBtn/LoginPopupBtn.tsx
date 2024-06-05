@@ -21,7 +21,7 @@ function LoginPopupBtn({ handleMouseEnter, handleMouseLeave }: ILoginPopupBtnPro
               <span className="text-black text-[11px] flex items-center justify-center">
                 Cliente novo?
               </span>
-              <span className="flex flex-col items-start text-black text-[11px] pl-1 hover:underline hover:text-orange-500">
+              <span className="flex flex-col items-start text-sky-700 text-[11px] pl-1 hover:underline hover:text-orange-500">
                 Comece aqui
               </span>
             </div>

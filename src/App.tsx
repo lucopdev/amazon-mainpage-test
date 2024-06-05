@@ -3,6 +3,7 @@ import React, { Suspense, lazy, useContext, useEffect, useState } from 'react';
 import ICepConsultContextProps from './interfaces/ICepConsultContextProps';
 import NavigationBar from './components/NavigationBar/NavigationBar';
 import IMenuContextProps from './interfaces/IMenuContextProps';
+import Indications from './components/Indications/Indications';
 import CepConsultContext from './context/CepConsultContext';
 import CepConsult from './components/CepConsult/CepConsult';
 import MenuContext from './context/MenuContext';
@@ -48,6 +49,7 @@ function App() {
         )}
         <Suspense fallback={<div className="w-full h-full"></div>}>
           <ProductComponent />
+          <Indications />
           <Footer />
         </Suspense>
         {isModalOpen && (

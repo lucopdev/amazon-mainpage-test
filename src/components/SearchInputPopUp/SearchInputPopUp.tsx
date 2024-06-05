@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import ISearchInputPopUpProps from '../../interfaces/ISearchInputPopUpProps';
+import uniqueId from 'uniqueid';
 
 function SearchInputPopUp({ searchHistory, width, inputSearchRef }: ISearchInputPopUpProps) {
+  const uKey = uniqueId();
   const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0 });
 
   useEffect(() => {
@@ -24,9 +26,14 @@ function SearchInputPopUp({ searchHistory, width, inputSearchRef }: ISearchInput
   return (
     <div className="absolute bg-white z-50" style={stylePopUp}>
       {searchHistory.map((historyText: string) => (
-        <p className="text-black p-2 pb-2 font-bold" key={historyText}>
-          {historyText}
-        </p>
+        <div key={uKey()} className="flex justify-center flex-col p-2 hover:bg-bgLiMenu">
+          <div className="flex items-center justify-between">
+            <p className="text-black font-bold" key={historyText}>
+              {historyText}
+            </p>
+            <button className="text-black font-bold text-[16px]">X</button>
+          </div>
+        </div>
       ))}
     </div>
   );
