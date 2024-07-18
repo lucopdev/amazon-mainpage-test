@@ -53,17 +53,11 @@ function App() {
           <Footer />
         </Suspense>
         {isMenuModalOpen && (
-          <div
-            className="absolute bg-bgBlackShadow left-0 h-[300vw] w-full z-30"
-            onClick={closeMenuModal}
-          ></div>
+          <div className="absolute bg-bgBlackShadow left-0 h-[300vw] w-full z-30" onClick={closeMenuModal}></div>
         )}
         <Menu />
         {isCepConsultOpen && (
-          <div
-            className="absolute left-0 bg-bgBlackShadow w-full h-full z-30"
-            onClick={closeCepMenu}
-          ></div>
+          <div className="absolute left-0 bg-bgBlackShadow w-full h-full z-30" onClick={closeCepMenu}></div>
         )}
         {isCepConsultOpen && <CepConsult />};
       </div>

@@ -24,10 +24,7 @@ function HeaderSlider({ slides }: IHeaderSlider) {
 
   const slideRight = () => {
     if (carousel.current) {
-      if (
-        carousel.current.scrollLeft + carousel.current.offsetWidth ===
-        carousel.current.scrollWidth
-      ) {
+      if (carousel.current.scrollLeft + carousel.current.offsetWidth === carousel.current.scrollWidth) {
         carousel.current.scrollTo({
           left: 0,
         });

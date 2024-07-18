@@ -49,17 +49,9 @@ function BodySlider({ slides, width = '100%', height = '100%' }: IBodySlider) {
               &#x02039;
             </span>
           </button>
-          <div
-            className="w-full flex items-center justify-between overflow-x-scroll no-scrollbar"
-            ref={carousel}
-          >
-            {slides?.map((slide, index) => (
-              <img
-                key={uKey()}
-                className="w-[200px] h-[200px]"
-                src={slide}
-                alt={`Slide ${index}`}
-              />
+          <div className="w-full flex items-center justify-between overflow-x-scroll no-scrollbar" ref={carousel}>
+            {slides?.slice(0, 15).map((slide) => (
+              <img key={uKey()} className="w-[200px] h-[200px]" src={slide} alt={`Slide`} />
             ))}
           </div>
           <button

@@ -14,9 +14,7 @@ function ProductComponent() {
   const uKey = uniqueId('key');
   const bgColors = ['bg-bgBeige', 'bg-bgGreen', 'bg-bgBlue', 'bg-bgOrange'];
 
-  const { products, categories } = useContext<IApiContextProps>(
-    ApiContext as React.Context<IApiContextProps>
-  );
+  const { products, categories } = useContext<IApiContextProps>(ApiContext as React.Context<IApiContextProps>);
 
   return (
     <div className="w-[95%] flex flex-wrap justify-center items-center">
@@ -48,9 +46,7 @@ function ProductComponent() {
                       >
                         <img className="w-20 h-20" src={productByCategory.images[0]} />
                       </div>
-                      <span className="text-[10px] pl-2 text-black">
-                        {productByCategory.title.slice(0, 27)}
-                      </span>
+                      <span className="text-[10px] pl-2 text-black">{productByCategory.title.slice(0, 27)}</span>
                     </div>
                   ))}
               </div>
@@ -80,21 +76,17 @@ function ProductComponent() {
         </div>
         <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px] max-desktop:w-[98.5%]">
           <BodySlider
-            slides={products?.map((product) =>
-              product.category === 'mobile-accessories' ? product.images[0] : ''
-            )}
+            slides={products
+              ?.filter((product) => product.category === 'mobile-accessories')
+              .flatMap((product) => product.images[0])}
           />
         </div>
 
         <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px] max-desktop:w-[98.5%]">
           <BodySlider
             slides={products
-              ?.map((product) => (product.category === 'mens-watches' ? product.images[0] : ''))
-              .concat(
-                products?.map((product) =>
-                  product.category === 'womens-watches' ? product.images[0] : ''
-                )
-              )}
+              ?.filter((product) => product.category === 'womens-watches' || product.category === 'mens-watches')
+              .flatMap((product) => product.images[0])}
           />
         </div>
       </Suspense>
@@ -115,23 +107,17 @@ function ProductComponent() {
         <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px] max-desktop:w-[98.5%]">
           <BodySlider
             slides={products
-              ?.map((product) => (product.category === 'home-accessories' ? product.images[0] : ''))
-              .concat(
-                products?.map((product) =>
-                  product.category === 'kitchen-accessories' ? product.images[0] : ''
-                )
-              )}
+              ?.filter(
+                (product) => product.category === 'home-accessories' || product.category === 'kitchen-accessories'
+              )
+              .flatMap((product) => product.images[0])}
           />
         </div>
         <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px] max-desktop:w-[98.5%]">
           <BodySlider
             slides={products
-              ?.map((product) => (product.category === 'laptops' ? product.images[0] : ''))
-              .concat(
-                products?.map((product) =>
-                  product.category === 'tablets' ? product.images[0] : ''
-                )
-              )}
+              ?.filter((product) => product.category === 'laptops' || product.category === 'tablets')
+              .flatMap((product) => product.images[0])}
           />
         </div>
       </Suspense>
@@ -152,23 +138,15 @@ function ProductComponent() {
         <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px] max-desktop:w-[98.5%]">
           <BodySlider
             slides={products
-              ?.map((product) => (product.category === 'beauty' ? product.images[0] : ''))
-              .concat(
-                products?.map((product) =>
-                  product.category === 'skin-care' ? product.images[0] : ''
-                )
-              )}
+              ?.filter((product) => product.category === 'skin-care' || product.category === 'beauty')
+              .flatMap((product) => product.images[0])}
           />
         </div>
         <div className="w-[95%] h-[290px] mt-[10px] mb-[10px] flex items-center justify-center desktop:w-[1460px] max-desktop:w-[98.5%]">
           <BodySlider
             slides={products
-              ?.map((product) => (product.category === 'womens-bags' ? product.images[0] : ''))
-              .concat(
-                products?.map((product) =>
-                  product.category === 'womens-shoes' ? product.images[0] : ''
-                )
-              )}
+              ?.filter((product) => product.category === 'womens-shoes' || product.category === 'womens-bags')
+              .flatMap((product) => product.images[0])}
           />
         </div>
       </Suspense>
